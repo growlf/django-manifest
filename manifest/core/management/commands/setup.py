@@ -122,7 +122,7 @@ class Command(BaseCommand):
         else:
             if not os.path.exists(base):
                 raise CommandError(
-                    "Project template does not exist the given "
+                    "Project template does not exist at the given "
                     "path: %s" % base
                 )
             else:
@@ -178,11 +178,10 @@ class ProjectInstaller(object):
         data = re.compile(r"SECRET_KEY\s*=.*$", re.M).sub(
             'SECRET_KEY = "%s"' % self.generate_secret_key(), data
         )
-        # data = re.compile(r"ROOT_URLCONF\s*=.*$", re.M).sub(
-        #     'ROOT_URLCONF = "%s"' % "%s.urls" % self.user_project_name, data,
-        # )
-        data = data.replace(self.project_name, self.user_project_name)
-        
+        data = re.compile(r"ROOT_URLCONF\s*=.*$", re.M).sub(
+            'ROOT_URLCONF = "%s"' % "%s.urls" % self.user_project_name, data,
+        )
+
         open(settings_filename, "wb").write(data)
     
     def fix_deploy(self, base, project_name):
