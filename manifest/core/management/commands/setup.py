@@ -127,6 +127,7 @@ class Command(BaseCommand):
                 )
             else:
                 project_name = os.path.basename(base)
+                source = os.path.abspath(base)
         
         installer = ProjectInstaller(source, destination, project_name, user_project_name)
         installer.copy()
