@@ -178,9 +178,10 @@ class ProjectInstaller(object):
         data = re.compile(r"SECRET_KEY\s*=.*$", re.M).sub(
             'SECRET_KEY = "%s"' % self.generate_secret_key(), data
         )
-        data = re.compile(r"ROOT_URLCONF\s*=.*$", re.M).sub(
-            'ROOT_URLCONF = "%s"' % "%s.urls" % self.user_project_name, data,
-        )
+        #data = re.compile(r"ROOT_URLCONF\s*=.*$", re.M).sub(
+        #    'ROOT_URLCONF = "%s"' % "%s.urls" % self.user_project_name, data,
+        #)
+        ###TODO: check for and/or add 'PROJECT_DIR' also
 
         open(settings_filename, "wb").write(data)
     
